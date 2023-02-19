@@ -10,3 +10,6 @@
 [submodule "ACQ400_HTTPD"]
 	path = HTTPD
 	url = https://github.com/D-TACQ/ACQ400_HTTPD.git
+[submodule "acq400ioc"]
+	path = acq400ioc
+	url = https://github.com/D-TACQ/acq400ioc.git
