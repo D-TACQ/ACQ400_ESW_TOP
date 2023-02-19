@@ -19,3 +19,6 @@
 [submodule "acq400_buildroot"]
 	path = acq400_buildroot
 	url = https://github.com/D-TACQ/acq400_buildroot.git
+[submodule "EPICS7/acq400_epics_base"]
+	path = EPICS7/acq400_epics_base
+	url = https://github.com/D-TACQ/acq400_epics_base.git
