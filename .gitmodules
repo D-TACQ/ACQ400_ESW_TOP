@@ -1,0 +1,12 @@
+[submodule "ACQ400DRV"]
+	path = ACQ400DRV
+	url = https://github.com/D-TACQ/ACQ400DRV.git
+[submodule "ACQ400COMMON"]
+	path = ACQ400COMMON
+	url = https://github.com/D-TACQ/ACQ400COMMON.git
+[submodule "Z7IO"]
+	path = Z7IO
+	url = https://github.com/D-TACQ/Z7IO.git
+[submodule "ACQ400_HTTPD"]
+	path = HTTPD
+	url = https://github.com/D-TACQ/ACQ400_HTTPD.git
