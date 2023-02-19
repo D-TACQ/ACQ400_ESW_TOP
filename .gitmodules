@@ -16,3 +16,6 @@
 [submodule "acq400_kernel"]
 	path = acq400_kernel
 	url = https://github.com/D-TACQ/acq400_kernel.git
+[submodule "acq400_buildroot"]
+	path = acq400_buildroot
+	url = https://github.com/D-TACQ/acq400_buildroot.git
