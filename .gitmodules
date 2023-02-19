@@ -13,3 +13,6 @@
 [submodule "acq400ioc"]
 	path = acq400ioc
 	url = https://github.com/D-TACQ/acq400ioc.git
+[submodule "acq400_kernel"]
+	path = acq400_kernel
+	url = https://github.com/D-TACQ/acq400_kernel.git
