@@ -36,7 +36,11 @@ cp d-tacq.config .config
 # buildroot
 
 ```
-sudo yum install perl-ExtUtils-MakeMaker
+sudo yum install perl-ExtUtils-MakeMaker ncurses-devel
+make acq400_main_defconfig
+make
+
+## fails at pyepics?. just make again ...
 
 ```
 

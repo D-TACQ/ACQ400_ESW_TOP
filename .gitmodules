@@ -22,3 +22,12 @@
 [submodule "EPICS7/acq400_epics_base"]
 	path = EPICS7/acq400_epics_base
 	url = https://github.com/D-TACQ/acq400_epics_base.git
+[submodule "EPICS7/modules/seq"]
+	path = EPICS7/modules/seq
+	url = https://github.com/D-TACQ/EPICS-seq.git
+[submodule "EPICS7/modules/asyn"]
+	path = EPICS7/modules/asyn
+	url = https://github.com/epics-modules/asyn.git
+[submodule "EPICS7/modules/StreamDevice"]
+	path = EPICS7/modules/StreamDevice
+	url = https://github.com/paulscherrerinstitute/StreamDevice.git
