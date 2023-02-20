@@ -28,3 +28,7 @@
 [submodule "EPICS7/modules/StreamDevice"]
 	path = EPICS7/modules/StreamDevice
 	url = https://github.com/paulscherrerinstitute/StreamDevice.git
+[submodule "EPICS7/modules/asyn"]
+	path = EPICS7/modules/asyn
+	url = https://github.com/D-TACQ/asyn.git
+	branch = acq400
