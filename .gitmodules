@@ -27,6 +27,7 @@
 [submodule "EPICS7/modules/seq"]
 	path = EPICS7/modules/seq
 	url = https://github.com/D-TACQ/EPICS-seq.git
+	branch = master
 [submodule "EPICS7/modules/StreamDevice"]
 	path = EPICS7/modules/StreamDevice
 	url = https://github.com/D-TACQ/StreamDevice.git
