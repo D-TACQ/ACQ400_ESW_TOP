@@ -25,7 +25,7 @@ install:
 ```
 wget https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-2018.3.tgz
 sudo yum install uboot-tools
-sudo tar xvzf tools/Xilinx/SDK/2018.3/gnu -C/
+sudo tar xvzf  xilinx-2018.3.tgz -C/
 source ./setenv
 cd acq400_kernel
 cp d-tacq.config .config
