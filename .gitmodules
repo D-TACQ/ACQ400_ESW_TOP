@@ -1,6 +1,7 @@
 [submodule "ACQ400DRV"]
 	path = ACQ400DRV
 	url = https://github.com/D-TACQ/ACQ400DRV.git
+	branch = main2
 [submodule "ACQ400COMMON"]
 	path = ACQ400COMMON
 	url = https://github.com/D-TACQ/ACQ400COMMON.git
