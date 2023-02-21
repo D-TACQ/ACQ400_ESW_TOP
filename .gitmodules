@@ -23,6 +23,7 @@
 [submodule "EPICS7/acq400_epics_base"]
 	path = EPICS7/acq400_epics_base
 	url = https://github.com/D-TACQ/acq400_epics_base.git
+	branch = acq400
 [submodule "EPICS7/modules/seq"]
 	path = EPICS7/modules/seq
 	url = https://github.com/D-TACQ/EPICS-seq.git
