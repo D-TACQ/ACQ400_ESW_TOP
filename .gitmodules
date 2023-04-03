@@ -42,3 +42,6 @@
 	path = EPICS7/modules/asyn
 	url = https://github.com/D-TACQ/asyn.git
 	branch = acq400
+[submodule "DRIVERS-OOK"]
+	path = DRIVERS-OOK
+	url = https://github.com/D-TACQ/DRIVERS-OOK.git

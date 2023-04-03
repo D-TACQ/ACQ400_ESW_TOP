@@ -1,0 +1,20 @@
+ACQ400DRV: 
+./make.zynq package
+cp cal/* opkg/usr/local/cal
+cp: target ‘opkg/usr/local/cal’ is not a directory
+make: *** [opkgcp] Error 
+
+hmm.. rm -Rf opkg; ./make.zynq release ... fixes
+
+make[1]: Leaving directory `/home/peter/PROJECTS/ACQ400_ESW_TOP/ACQ400DRV'
+cp ../DRIVERS/emlog/nbcat  opkg/usr/local/bin
+cp: cannot stat ‘../DRIVERS/emlog/nbcat’: No such file or directory
+make: *** [emlog] Error 1
+
+MORE joy!
+
+
+acq400ioc:
+../acq400_judgement.cpp:32:22: fatal error: acq-util.h: No such file or directory
+ #include "acq-util.h"
+
