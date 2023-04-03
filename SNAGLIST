@@ -12,9 +12,58 @@ cp: cannot stat ‘../DRIVERS/emlog/nbcat’: No such file or directory
 make: *** [emlog] Error 1
 
 MORE joy!
-
+.. make ACQ400DRV/DRIVERS a subdirectory, then emlog etc become git submodules...
 
 acq400ioc:
 ../acq400_judgement.cpp:32:22: fatal error: acq-util.h: No such file or directory
  #include "acq-util.h"
+
+
+We have a build! Do we want users to tag?
+  MODPOST 1 modules
+make[3]: Leaving directory `/home/peter/PROJECTS/ACQ400_ESW_TOP/acq400_kernel'
+make[2]: Leaving directory `/home/peter/PROJECTS/ACQ400_ESW_TOP/DRIVERS-OOK/emlog'
+make[1]: Leaving directory `/home/peter/PROJECTS/ACQ400_ESW_TOP/DRIVERS-OOK'
+‘../DRIVERS-OOK/AD5686/ad5686.ko’ -> ‘modules_output/ad5686.ko’
+‘../DRIVERS-OOK/AD5686/ad5696-i2c.ko’ -> ‘modules_output/ad5696-i2c.ko’
+‘../DRIVERS-OOK/ISL22313/isl22313.ko’ -> ‘modules_output/isl22313.ko’
+‘../DRIVERS-OOK/SI5326/si5326.ko’ -> ‘modules_output/si5326.ko’
+‘../DRIVERS-OOK/emlog/emlog.ko’ -> ‘modules_output/emlog.ko’
+FINISHED: release/packageko-4.14.0-acq400-xilinx-g4cd1b64-230403231729.img size:11592
+echo do NOT rm -Rf opkg/*
+do NOT rm -Rf opkg/etc opkg/usr
+mkdir -p release
+tar czf release/10-acq420-230403231729.tgz -C opkg .
+created package release/10-acq420-230403231729.tgz
+rm -f ../PACKAGES/10-acq420*
+git tag -a -m 10-acq420-230403231729.tgz r230403231729 
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <peter@naboo.d-tacq>) not allowed
+make: *** [package] Error 128
+
+
+peter@naboo ACQ400DRV]$ ls -l release/
+total 12060
+-rw-rw-r-- 1 peter peter   477957 Apr  3 23:17 10-acq420-230403231729.tgz
+-rw-r--r-- 1 peter peter 11870208 Apr  3 23:17 packageko-4.14.0-acq400-xilinx-g4cd1b64-230403231729.img
+
+
+[pgm@hoy5 ACQ420FMC]$ ls -lt release/ | head
+total 7720800
+-rw-r--r-- 1 pgm pgm   511549 Apr  3 22:00 10-acq420-230403220027.tgz
+-rw-r--r-- 1 pgm pgm 12685312 Apr  3 22:00 packageko-4.14.0-acq400-xilinx-230403220027.img
+
+
+=> SMALL! probably missing some bits. Or maybe we lost some crud?.
+
 
