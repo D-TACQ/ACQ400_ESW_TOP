@@ -45,3 +45,18 @@
 [submodule "DRIVERS-OOK"]
 	path = DRIVERS-OOK
 	url = https://github.com/D-TACQ/DRIVERS-OOK.git
+[submodule "ACQ400_TRANSIENT"]
+	path = ACQ400_TRANSIENT
+	url = https://github.com/D-TACQ/ACQ400_TRANSIENT.git
+[submodule "ACQ400_AI_MONITOR"]
+	path = ACQ400_AI_MONITOR
+	url = https://github.com/D-TACQ/ACQ400_AI_MONITOR.git
+[submodule "ACQ1001"]
+	path = ACQ1001
+	url = https://github.com/D-TACQ/ACQ1001
+[submodule "ACQ2x06"]
+	path = ACQ2x06
+	url = https://github.com/D-TACQ/ACQ2x06.git
+[submodule "ACQ1002"]
+	path = ACQ1002
+	url = https://github.com/D-TACQ/ACQ1002.git

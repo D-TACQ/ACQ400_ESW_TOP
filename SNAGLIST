@@ -66,4 +66,12 @@ total 7720800
 
 => SMALL! probably missing some bits. Or maybe we lost some crud?.
 
+20220406 : Add remaining packages, create a package dir
+ 1008  git submodule update --remote ACQ400DRV
+ 1014  git submodule add https://github.com/D-TACQ/ACQ400_TRANSIENT.git
+ 1016  git submodule update --remote ACQ400_TRANSIENT
+ 1021  mkdir PACKAGES
+ 1022  git add PACKAGES
+ 1023  git submodule add https://github.com/D-TACQ/ACQ400_AI_MONITOR.git
+ 1024  git submodule update --remote ACQ400_AI_MONITOR
 
