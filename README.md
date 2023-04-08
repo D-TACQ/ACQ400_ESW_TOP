@@ -10,7 +10,7 @@ Top level project to build ACQ400 Embedded SoftWare
 git clone --recurse-submodules https://github.com/D-TACQ/ACQ400_ESW_TOP.git
 ```
 
-# To update
+# To update NOT NEEDED for a fresh default build 
 
 ```
 git submodule update --remote acq400_kernel
@@ -27,6 +27,9 @@ wget https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-201
 
 sudo yum install uboot-tools
 sudo apt-get install u-boot-tools
+```
+
+# Linux kernel
 
 sudo tar xvzf  xilinx-2018.3.tgz -C/
 source ./setenv
@@ -67,7 +70,7 @@ peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uram
 ```
 
 # EPICS base 
-## follow EPICS/acq400_epics_base/README.ACQ400
+## follow EPICS7/acq400_epics_base/README.ACQ400
 
 # ACQ400DRV
 mkdir PACKAGES
