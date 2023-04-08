@@ -63,3 +63,6 @@
 [submodule "ACQ400RELEASE"]
 	path = ACQ400RELEASE
 	url = https://github.com/D-TACQ/ACQ400RELEASE.git
+[submodule "SPECIALS/CUSTOM_Z7IO_PAYLOAD"]
+	path = SPECIALS/CUSTOM_Z7IO_PAYLOAD
+	url = https://github.com/D-TACQ/CUSTOM_Z7IO_PAYLOAD.git
