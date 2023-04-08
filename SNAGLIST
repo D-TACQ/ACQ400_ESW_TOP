@@ -75,3 +75,14 @@ total 7720800
  1023  git submodule add https://github.com/D-TACQ/ACQ400_AI_MONITOR.git
  1024  git submodule update --remote ACQ400_AI_MONITOR
 
+OK: policy for shared library
+
+ESW_TOP/include
+ESW_TOP/lib/ARCH
+
+ACQ400DRV creates them
+acq400ioc links them 
+
+end of.
+
+
