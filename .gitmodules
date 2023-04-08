@@ -60,3 +60,6 @@
 [submodule "ACQ1002"]
 	path = ACQ1002
 	url = https://github.com/D-TACQ/ACQ1002.git
+[submodule "ACQ400RELEASE"]
+	path = ACQ400RELEASE
+	url = https://github.com/D-TACQ/ACQ400RELEASE.git
