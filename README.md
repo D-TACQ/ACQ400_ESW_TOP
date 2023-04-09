@@ -53,13 +53,14 @@ cp d-tacq.config .config
 
 # Initrd and Rootfs: buildroot
 
-## host packages
+## Host Packages
 
 Redhat
 ```
 sudo yum install perl-ExtUtils-MakeMaker ncurses-devel
 ```
 Ubuntu
+```
 sudo apt-get install libextutils-makemaker-cpanfile-perl
 sudo apt-get install libncurses5-dev
 ```
@@ -72,6 +73,7 @@ make
 ```
 
 fails at pyepics?. just make again ...
+
 ```
 result:
 Image Name:   D-TACQ ACQ400 INITRD
