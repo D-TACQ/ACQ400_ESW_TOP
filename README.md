@@ -1,22 +1,19 @@
 # ACQ400_ESW_TOP
 Top level project to build ACQ400 Embedded SoftWare
 
-# all components are submodules.
+### all components are submodules.
 
 
-# To build ESW:
+# To Clone ESW sources:
 
 ```
 git clone --recurse-submodules https://github.com/D-TACQ/ACQ400_ESW_TOP.git
 ```
 
 ## To update NOT NEEDED for a fresh default build 
-
 ```
 git submodule update --remote acq400_kernel
 ```
-
-
 
 Compiler: created on original build host like this:
 
