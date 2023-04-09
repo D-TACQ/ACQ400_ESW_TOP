@@ -18,10 +18,14 @@ git submodule update --remote acq400_kernel
 
 
 
-Tools: created:
-tar cvzf xilinx-2018.3.tgz -C / --exclude=microblaze tools/Xilinx/SDK/2018.3/gnu
+Compiler: created on original build host like this:
 
-install:
+```
+tar cvzf xilinx-2018.3.tgz -C / --exclude=microblaze tools/Xilinx/SDK/2018.3/gnu
+```
+
+# Install Compiler:
+
 ```
 wget https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-2018.3.tgz
 
