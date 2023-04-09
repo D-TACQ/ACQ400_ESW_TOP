@@ -28,15 +28,22 @@ tar cvzf xilinx-2018.3.tgz -C / --exclude=microblaze tools/Xilinx/SDK/2018.3/gnu
 
 ```
 wget https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-2018.3.tgz
+sudo tar xvzf  xilinx-2018.3.tgz -C/
+```
 
+## Host Packages
+Redhat
+```
 sudo yum install uboot-tools
+```
+Ubuntu
+```
 sudo apt-get install u-boot-tools
 ```
 
 # Linux kernel
 
 ```
-sudo tar xvzf  xilinx-2018.3.tgz -C/
 source ./setenv
 cd acq400_kernel
 cp d-tacq.config .config
@@ -44,7 +51,7 @@ cp d-tacq.config .config
 ./make.zynq uImage modules dtbs
 ```
 
-# buildroot
+# Initrd and Rootfs: buildroot
 
 ## host packages
 ```
