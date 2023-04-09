@@ -10,7 +10,7 @@ Top level project to build ACQ400 Embedded SoftWare
 git clone --recurse-submodules https://github.com/D-TACQ/ACQ400_ESW_TOP.git
 ```
 
-# To update NOT NEEDED for a fresh default build 
+## To update NOT NEEDED for a fresh default build 
 
 ```
 git submodule update --remote acq400_kernel
@@ -31,6 +31,7 @@ sudo apt-get install u-boot-tools
 
 # Linux kernel
 
+```
 sudo tar xvzf  xilinx-2018.3.tgz -C/
 source ./setenv
 cd acq400_kernel
@@ -41,11 +42,16 @@ cp d-tacq.config .config
 
 # buildroot
 
+## host packages
 ```
 sudo yum install perl-ExtUtils-MakeMaker ncurses-devel
 
 sudo apt-get install libextutils-makemaker-cpanfile-perl
 sudo apt-get install libncurses5-dev
+```
+
+## build
+```
 cd acq400_buildroot
 
 make acq400_main_defconfig
@@ -65,7 +71,6 @@ POSTIMAGE99
 peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uramdisk.image.gz output/images/rootfs.ext2.gz 
 -rw-r--r-- 1 peter peter 79829008 Apr  7 14:16 output/images/rootfs.ext2.gz
 -rw-r--r-- 1 peter peter  2982692 Apr  7 14:17 output/images/uramdisk.image.gz
-
 
 ```
 
