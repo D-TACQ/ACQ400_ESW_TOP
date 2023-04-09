@@ -90,33 +90,45 @@ peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uram
 ```
 
 # EPICS base 
-## follow EPICS7/acq400_epics_base/README.ACQ400
+
+Follow [README.ACQ400](https://github.com/D-TACQ/acq400_epics_base/blob/acq400/README.ACQ400)
+
 
 # ACQ400DRV
+```
 mkdir PACKAGES
 source ./setenv
 cd ACQ400DRV
 make
 ./make.zynq
 ./make.zynq package
+```
 
 # CARRIER Specific packages
+```
 for P in ACQ1001 ACQ1002 ACQ2x06 Z7IO; do (cd $P; ./make.package); done
+```
 
 # MISC PACKAGES
-
+```
 for P in HTTPD ACQ400_TRANSIENT ACQ400_AI_MONITOR  ; do (cd $P; ./make.package); done
+```
 
 
 # acq400ioc
-
+## Host packages
+Ubuntu
+```
 sudo apt-install libfftw3-dev libpcre++-dev
-
+```
+## Build
+```
 cd acq400ioc
 ./copy_libs
 source ../EPICS7/base/setup.env
 make
 ./make.package
+```
 
 
 
