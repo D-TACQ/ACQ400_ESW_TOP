@@ -1,37 +1,48 @@
 # ACQ400_ESW_TOP
 Top level project to build ACQ400 Embedded SoftWare
 
-# all components are submodules.
+### all components are submodules.
 
 
-# To build ESW:
+# To Clone ESW sources:
 
 ```
 git clone --recurse-submodules https://github.com/D-TACQ/ACQ400_ESW_TOP.git
 ```
 
-# To update NOT NEEDED for a fresh default build 
-
+## To update NOT NEEDED for a fresh default build 
 ```
 git submodule update --remote acq400_kernel
 ```
 
+Compiler: created on original build host like this:
 
-
-Tools: created:
+```
 tar cvzf xilinx-2018.3.tgz -C / --exclude=microblaze tools/Xilinx/SDK/2018.3/gnu
+```
 
-install:
+# Install Compiler:
+
 ```
 wget https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-2018.3.tgz
+sudo tar xvzf  xilinx-2018.3.tgz -C/
+```
 
+## Host Packages
+Redhat
+```
 sudo yum install uboot-tools
+```
+Ubuntu
+```
 sudo apt-get install u-boot-tools
 ```
 
-# Linux kernel
+# Build Components
 
-sudo tar xvzf  xilinx-2018.3.tgz -C/
+## 1 Linux kernel
+
+```
 source ./setenv
 cd acq400_kernel
 cp d-tacq.config .config
@@ -39,20 +50,30 @@ cp d-tacq.config .config
 ./make.zynq uImage modules dtbs
 ```
 
-# buildroot
+## 2 Initrd and Rootfs: buildroot
 
+### Host Packages
+
+Redhat
 ```
 sudo yum install perl-ExtUtils-MakeMaker ncurses-devel
-
+```
+Ubuntu
+```
 sudo apt-get install libextutils-makemaker-cpanfile-perl
 sudo apt-get install libncurses5-dev
-cd acq400_buildroot
+```
 
+### build
+```
+cd acq400_buildroot
 make acq400_main_defconfig
 make
+```
 
-## fails at pyepics?. just make again ...
+fails at pyepics?. just make again ...
 
+```
 result:
 Image Name:   D-TACQ ACQ400 INITRD
 Created:      Fri Apr  7 14:17:12 2023
@@ -65,38 +86,49 @@ POSTIMAGE99
 peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uramdisk.image.gz output/images/rootfs.ext2.gz 
 -rw-r--r-- 1 peter peter 79829008 Apr  7 14:16 output/images/rootfs.ext2.gz
 -rw-r--r-- 1 peter peter  2982692 Apr  7 14:17 output/images/uramdisk.image.gz
-
-
 ```
 
-# EPICS base 
-## follow EPICS7/acq400_epics_base/README.ACQ400
+## 3 EPICS base 
 
-# ACQ400DRV
+Follow [README.ACQ400](https://github.com/D-TACQ/acq400_epics_base/blob/acq400/README.ACQ400)
+
+
+## 4 ACQ400DRV
+```
 mkdir PACKAGES
 source ./setenv
 cd ACQ400DRV
 make
 ./make.zynq
 ./make.zynq package
+```
 
-# CARRIER Specific packages
+## 5 CARRIER Specific packages
+```
 for P in ACQ1001 ACQ1002 ACQ2x06 Z7IO; do (cd $P; ./make.package); done
+```
 
-# MISC PACKAGES
-
+## 6 MISC PACKAGES
+```
 for P in HTTPD ACQ400_TRANSIENT ACQ400_AI_MONITOR  ; do (cd $P; ./make.package); done
+```
 
 
-# acq400ioc
+## 7 acq400ioc
 
+### Host packages
+Ubuntu
+```
 sudo apt-install libfftw3-dev libpcre++-dev
-
+```
+### Build
+```
 cd acq400ioc
 ./copy_libs
 source ../EPICS7/base/setup.env
 make
 ./make.package
+```
 
 
 
