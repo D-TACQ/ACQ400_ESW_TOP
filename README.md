@@ -41,7 +41,9 @@ Ubuntu
 sudo apt-get install u-boot-tools
 ```
 
-# 1 Linux kernel
+# Build Components
+
+## 1 Linux kernel
 
 ```
 source ./setenv
@@ -51,9 +53,9 @@ cp d-tacq.config .config
 ./make.zynq uImage modules dtbs
 ```
 
-# 2 Initrd and Rootfs: buildroot
+## 2 Initrd and Rootfs: buildroot
 
-## Host Packages
+### Host Packages
 
 Redhat
 ```
@@ -65,7 +67,7 @@ sudo apt-get install libextutils-makemaker-cpanfile-perl
 sudo apt-get install libncurses5-dev
 ```
 
-## build
+### build
 ```
 cd acq400_buildroot
 make acq400_main_defconfig
@@ -89,12 +91,12 @@ peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uram
 -rw-r--r-- 1 peter peter  2982692 Apr  7 14:17 output/images/uramdisk.image.gz
 ```
 
-# 3 EPICS base 
+## 3 EPICS base 
 
 Follow [README.ACQ400](https://github.com/D-TACQ/acq400_epics_base/blob/acq400/README.ACQ400)
 
 
-# 4 ACQ400DRV
+## 4 ACQ400DRV
 ```
 mkdir PACKAGES
 source ./setenv
@@ -104,24 +106,25 @@ make
 ./make.zynq package
 ```
 
-# 5 CARRIER Specific packages
+## 5 CARRIER Specific packages
 ```
 for P in ACQ1001 ACQ1002 ACQ2x06 Z7IO; do (cd $P; ./make.package); done
 ```
 
-# 6 MISC PACKAGES
+## 6 MISC PACKAGES
 ```
 for P in HTTPD ACQ400_TRANSIENT ACQ400_AI_MONITOR  ; do (cd $P; ./make.package); done
 ```
 
 
-# 7 acq400ioc
-## Host packages
+## 7 acq400ioc
+
+### Host packages
 Ubuntu
 ```
 sudo apt-install libfftw3-dev libpcre++-dev
 ```
-## Build
+### Build
 ```
 cd acq400ioc
 ./copy_libs
