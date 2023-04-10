@@ -8,7 +8,7 @@ PACKAGES=../PACKAGES
 mkdir -p ${PACKAGES}
 
 rm -Rf opkg/*
-mkdir -p release opkg/epics/lib opkg/epics/bin opkg/epics/pyepics
+mkdir -p release opkg/epics/lib opkg/epics/bin
 cp -a base/lib/linux-arm/lib*.so* opkg/epics/lib
 cp -a base/bin/linux-arm/* opkg/epics/bin
 
