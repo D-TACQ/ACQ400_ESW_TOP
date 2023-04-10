@@ -91,6 +91,10 @@ peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uram
 ## 3 EPICS base 
 
 Follow [README.ACQ400](https://github.com/D-TACQ/acq400_epics_base/blob/acq400/README.ACQ400)
+Then build library package..
+```
+(cd EPICS7; ./make.package)
+```
 
 
 ## 4 ACQ400DRV
