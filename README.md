@@ -134,6 +134,23 @@ make
 ./make.package
 ```
 
+# Make a release
+
+Only "master_version_host" can increment the VERSION number, but other hosts can create release tarballs for local use, and to prove that the distributed source is good. To make a "non master version host" release tarball.
+
+ - cd ACQ400RELEASE
+ - ./scripts/make.release
+  - the script will prompt you to install an FPGA img file if a suitable img file is not already available.
+
+The release appears like this:
+```
+RELEASE COMPLETE:
+-rw-r--r-- 1 peter peter 122961920 Apr 10 17:15 REL/acq2x06_fpga-584-20230405215151.img
+-rw-rw-r-- 1 peter peter 104601600 Apr 10 17:15 REL/acq400-584-20230410171508-danna.tar
+```
+ - the RELEASE tarball: eg acq400-VER-DATE-host.tar should be unpacked to the top level of the embedded SD card
+ - the FPGA image eg acq2x06_fpga-VER-DATE.img should be copyed to the SD card ./ko directory
+
 
 
 
