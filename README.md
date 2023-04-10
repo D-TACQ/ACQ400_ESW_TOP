@@ -1,7 +1,7 @@
 # ACQ400_ESW_TOP
 Top level project to build ACQ400 Embedded SoftWare
 
-### all components are submodules.
+### all components are git-submodules.
 
 
 # To Clone ESW sources:
@@ -10,10 +10,7 @@ Top level project to build ACQ400 Embedded SoftWare
 git clone --recurse-submodules https://github.com/D-TACQ/ACQ400_ESW_TOP.git
 ```
 
-## To update NOT NEEDED for a fresh default build 
-```
-git submodule update --remote acq400_kernel
-```
+# Install Compiler:
 
 Compiler: created on original build host like this:
 
@@ -21,8 +18,7 @@ Compiler: created on original build host like this:
 tar cvzf xilinx-2018.3.tgz -C / --exclude=microblaze tools/Xilinx/SDK/2018.3/gnu
 ```
 
-# Install Compiler:
-
+Install:
 ```
 wget https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-2018.3.tgz
 sudo tar xvzf  xilinx-2018.3.tgz -C/
@@ -150,6 +146,12 @@ RELEASE COMPLETE:
 ```
  - the RELEASE tarball: eg acq400-VER-DATE-host.tar should be unpacked to the top level of the embedded SD card
  - the FPGA image eg acq2x06_fpga-VER-DATE.img should be copyed to the SD card ./ko directory
+
+## To create an release SD card for Z7IO:
+- follow extra steps in [Z7OIO INSTALL_SD.md](https://github.com/D-TACQ/Z7IO/blob/main/INSTALL_SD.md)
+
+Please send any comments, queries to peter.milne@d-tacq.com
+
 
 
 
