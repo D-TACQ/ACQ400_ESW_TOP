@@ -1,0 +1,28 @@
+#!/bin/bash
+# EPICSV7 PVA libs
+DC=$(date +%y%m%d%H%M)
+SEQ=39
+PKG=epics7
+PACKAGES=../PACKAGES
+
+mkdir -p ${PACKAGES}
+
+rm -Rf opkg/*
+mkdir -p release opkg/epics/lib opkg/epics/bin opkg/epics/pyepics
+cp -a base/lib/linux-arm/lib*.so* opkg/epics/lib
+cp -a base/bin/linux-arm/* opkg/epics/bin
+
+cat - > opkg/epics/epics7.init <<EOF 
+#!/bin/sh
+echo +++ epics7.init
+(cd /usr/local/lib; for so in /usr/local/epics7/lib/lib*.so; do ln -s \$so; done)
+(cd /usr/local/bin; for file in /usr/local/epics7/bin/*; do ln -s \$file; done)
+EOF
+chmod a+rx opkg/epics/epics7.init
+
+IMG=${SEQ}-${PKG}-${DC}.ovl
+mksquashfs opkg/epics/* release/$IMG -no-xattrs
+ls -l release/$IMG
+rm -f ${PACKAGES}/${SEQ}-${PKG}*
+cp release/$IMG ${PACKAGES}
+
