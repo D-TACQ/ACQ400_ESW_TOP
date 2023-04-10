@@ -7,6 +7,8 @@ Top level project to build ACQ400 Embedded SoftWare
 # To Clone ESW sources:
 
 ```
+mkdir -p PROJECTS;cd PROJECTS
+
 git clone --recurse-submodules https://github.com/D-TACQ/ACQ400_ESW_TOP.git
 ```
 
@@ -36,6 +38,10 @@ sudo apt-get install u-boot-tools
 
 # Build Components
 
+## 0 cd ESW_TOP
+```
+cd ACQ400_ESW_TOP
+```
 ## 1 Linux kernel
 
 ```
