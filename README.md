@@ -50,6 +50,7 @@ cd acq400_kernel
 cp d-tacq.config .config
 ./make.zynq oldconfig
 ./make.zynq uImage modules dtbs
+cd ..
 ```
 
 ## 2 Initrd and Rootfs: buildroot
@@ -71,6 +72,7 @@ sudo apt-get install libncurses5-dev
 cd acq400_buildroot
 make acq400_main_defconfig
 make
+cd ..
 ```
 
 fails at pyepics?. just make again ...
@@ -107,11 +109,12 @@ cd ACQ400DRV
 make
 ./make.zynq
 ./make.zynq package
+cd ..
 ```
 
 ## 5 CARRIER Specific packages
 ```
-for P in ACQ1001 ACQ1002 ACQ2x06 Z7IO; do (cd $P; ./make.package); done
+for P in ACQ400COMMON ACQ1001 ACQ1002 ACQ2x06 Z7IO; do (cd $P; ./make.package); done
 ```
 
 ## 6 MISC PACKAGES
@@ -134,6 +137,7 @@ cd acq400ioc
 source ../EPICS7/base/setup.env
 make
 ./make.package
+cd ..
 ```
 
 # Make a release
