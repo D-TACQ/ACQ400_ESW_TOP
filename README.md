@@ -103,10 +103,7 @@ Then build library package..
 
 ## 4 ACQ400DRV
 ```
-source ./setenv
-cd ACQ400DRV
-./make.zynq all package
-cd ..
+(cd ACQ400DRV; ./make.package)
 ```
 
 ## 5 CARRIER Specific packages
