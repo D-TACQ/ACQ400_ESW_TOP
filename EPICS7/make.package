@@ -5,6 +5,29 @@ SEQ=39
 PKG=epics7
 PACKAGES=../PACKAGES
 
+
+if [ -e /usr/local/epics ]; then
+	if [ -L /usr/local/epics ]; then
+		if [ "$(ls -l /usr/local/|grep epics | awk '{ print $11 }')" = "$PWD" ]; then
+			echo /usr/local/epics is correctly set
+		else
+			echo "ERROR: I don't like the look of /usr/local/epics"
+			exit 1
+		fi
+ 	fi
+else
+	sudo ln -s $PWD /usr/local/epics
+fi
+
+(
+cd base
+source ./setup.env
+./setup_buildroot_links
+make
+(cd ../modules; for dir in *;do (cd $dir; make); done)
+./harvest
+)
+
 mkdir -p ${PACKAGES}
 
 rm -Rf opkg/*
