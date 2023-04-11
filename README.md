@@ -103,12 +103,9 @@ Then build library package..
 
 ## 4 ACQ400DRV
 ```
-mkdir PACKAGES
 source ./setenv
 cd ACQ400DRV
-make
-./make.zynq
-./make.zynq package
+./make.zynq all package
 cd ..
 ```
 
