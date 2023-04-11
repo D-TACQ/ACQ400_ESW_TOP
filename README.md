@@ -135,9 +135,9 @@ cd ..
 # Make a release
 
 Only "master_version_host" can increment the VERSION number, but other hosts can create release tarballs for local use, and to prove that the distributed source is good. To make a "non master version host" release tarball.
-
- - cd ACQ400RELEASE
- - ./scripts/make.release
+```
+(cd ACQ400RELEASE; ./scripts/make.release)
+```
   - the script will prompt you to install an FPGA img file if a suitable img file is not already available.
 
 The release appears like this:
@@ -152,7 +152,7 @@ RELEASE COMPLETE:
 ## To create a release SD card for Z7IO:
 - follow extra steps in [Z7OIO INSTALL_SD.md](https://github.com/D-TACQ/Z7IO/blob/main/INSTALL_SD.md)
 
-Please send any comments, queries to peter.milne@d-tacq.com
+Please send any comments, queries, tips (hints)  to peter.milne@d-tacq.com
 
 
 
