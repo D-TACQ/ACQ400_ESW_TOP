@@ -21,7 +21,7 @@ if [ -e /usr/local/epics ]; then
 else
 	sudo ln -s $PWD /usr/local/epics
 fi
-exit 1
+
 (
 cd base
 source ./setup.env
