@@ -8,7 +8,10 @@ PACKAGES=../PACKAGES
 
 if [ -e /usr/local/epics ]; then
 	if [ -L /usr/local/epics ]; then
-		if [ "$(ls -l /usr/local/|grep epics | awk '{ print $11 }')" = "$PWD" ]; then
+		ltgt="$(ls -l /usr/local/|grep epics | awk '{ print $11 }')"
+		ltgt=${ltgt%/}
+		#echo ltgt $ltgt
+		if [ "$ltgt" = "$PWD" ]; then
 			echo /usr/local/epics is correctly set
 		else
 			echo "ERROR: I don't like the look of /usr/local/epics"
@@ -18,7 +21,7 @@ if [ -e /usr/local/epics ]; then
 else
 	sudo ln -s $PWD /usr/local/epics
 fi
-
+exit 1
 (
 cd base
 source ./setup.env

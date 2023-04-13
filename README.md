@@ -120,7 +120,7 @@ for P in HTTPD ACQ400_TRANSIENT ACQ400_AI_MONITOR  ; do (cd $P; ./make.package);
 ### Host packages
 Ubuntu
 ```
-sudo apt-install libfftw3-dev libpcre++-dev
+sudo apt-get install libfftw3-dev libpcre++-dev
 ```
 ### Build
 ```
@@ -145,15 +145,14 @@ The release appears like this:
 RELEASE COMPLETE:
 -rw-r--r-- 1 peter peter 122961920 Apr 10 17:15 REL/acq2x06_fpga-584-20230405215151.img
 -rw-rw-r-- 1 peter peter 104601600 Apr 10 17:15 REL/acq400-584-20230410171508-danna.tar
+```
 
 ## to update an existing system
-NB: downloaded FPGA image date code will not match local build, so copy it after the update has completed..
+**NB: downloaded FPGA image date code will not match local build, so copy it after the update has completed..**
 
 ```
 scp ./REL/acq400-584-20230413075148-danna.tar root@acq2206_001:/tmp
-
-ssh root@acq2206_001
-/mnt/bin/update_release /tmp/acq400-584-20230413075148-danna.tar
+ssh root@acq2206_001 /mnt/bin/update_release /tmp/acq400-584-20230413075148-danna.tar
 scp ./REL/acq2x06_fpga-584-20230405215151.img root@acq2206_001:/mnt/ko
 ```
 
