@@ -145,6 +145,19 @@ The release appears like this:
 RELEASE COMPLETE:
 -rw-r--r-- 1 peter peter 122961920 Apr 10 17:15 REL/acq2x06_fpga-584-20230405215151.img
 -rw-rw-r-- 1 peter peter 104601600 Apr 10 17:15 REL/acq400-584-20230410171508-danna.tar
+
+## to update an existing system
+NB: downloaded FPGA image date code will not match local build, so copy it after the update has completed..
+
+```
+scp ./REL/acq400-584-20230413075148-danna.tar root@acq2206_001:/tmp
+
+ssh root@acq2206_001
+/mnt/bin/update_release /tmp/acq400-584-20230413075148-danna.tar
+scp ./REL/acq2x06_fpga-584-20230405215151.img root@acq2206_001:/mnt/ko
+```
+
+## to create a release on a fresh SD card:
 ```
  - the RELEASE tarball: eg acq400-VER-DATE-host.tar should be unpacked to the top level of the embedded SD card
  - the FPGA image eg acq2x06_fpga-VER-DATE.img should be copyed to the SD card ./ko directory
