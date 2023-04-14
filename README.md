@@ -41,11 +41,11 @@ sudo apt-get install u-boot-tools
 ## 0 cd ESW_TOP
 ```
 cd ACQ400_ESW_TOP
+source ./setenv
 ```
 ## 1 Linux kernel
 
 ```
-source ./setenv
 cd acq400_kernel
 cp d-tacq.config .config
 ./make.zynq oldconfig
