@@ -85,4 +85,9 @@ acq400ioc links them
 
 end of.
 
+Making a master_version_host
+git submodule set-url ACQ400RELEASE git@github.com:D-TACQ/ACQ400RELEASE.git
+cd ACQ400RELEASE/
+git checkout master
+git pull origin master
 
