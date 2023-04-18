@@ -66,3 +66,6 @@
 [submodule "SPECIALS/CUSTOM_Z7IO_PAYLOAD"]
 	path = SPECIALS/CUSTOM_Z7IO_PAYLOAD
 	url = https://github.com/D-TACQ/CUSTOM_Z7IO_PAYLOAD.git
+[submodule "SPECIALS/CUSTOM_GPG"]
+	path = SPECIALS/CUSTOM_GPG
+	url = https://github.com/D-TACQ/acq400_custom_GPG.git
