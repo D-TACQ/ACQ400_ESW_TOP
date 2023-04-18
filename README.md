@@ -94,7 +94,14 @@ peter@danna:~/PROJECTS/ACQ400_ESW_TOP/acq400_buildroot$ ls -l output/images/uram
 
 ## 3 EPICS base 
 
-```
+### Host Packages
+
+Please review EPICS7/base/README.ACQ400
+
+### Build
+
+
+
 (cd EPICS7; ./make.package)
 ```
 
@@ -118,6 +125,10 @@ for P in HTTPD ACQ400_TRANSIENT ACQ400_AI_MONITOR  ; do (cd $P; ./make.package);
 ## 7 acq400ioc
 
 ### Host packages
+CENTOS
+```
+sudo dnf install fftw-devel pcre-devel
+```
 Ubuntu
 ```
 sudo apt-get install libfftw3-dev libpcre++-dev
