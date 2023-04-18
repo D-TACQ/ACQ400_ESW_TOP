@@ -1,0 +1,4 @@
+
+for p in CUSTOM_DPG CUSTOM_AWG CUSTOM_GPG CUSTOM_Z7IO_PAYLOAD; do
+	(cd $p; ./make.package)
+done

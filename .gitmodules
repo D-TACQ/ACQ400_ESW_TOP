@@ -69,3 +69,9 @@
 [submodule "SPECIALS/CUSTOM_GPG"]
 	path = SPECIALS/CUSTOM_GPG
 	url = https://github.com/D-TACQ/acq400_custom_GPG.git
+[submodule "SPECIALS/CUSTOM_AWG"]
+	path = SPECIALS/CUSTOM_AWG
+	url = https://github.com/D-TACQ/acq400_custom_AWG.git
+[submodule "SPECIALS/CUSTOM_DPG"]
+	path = SPECIALS/CUSTOM_DPG
+	url = https://github.com/petermilne/CUSTOM_DPG.git
