@@ -75,3 +75,15 @@
 [submodule "SPECIALS/CUSTOM_DPG"]
 	path = SPECIALS/CUSTOM_DPG
 	url = https://github.com/petermilne/CUSTOM_DPG.git
+[submodule "SPECIALS/BOLODSP"]
+	path = SPECIALS/BOLODSP
+	url = https://github.com/petermilne/BOLODSP.git
+[submodule "SPECIALS/RADCELF"]
+	path = SPECIALS/RADCELF
+	url = https://github.com/D-TACQ/RADCELF.git
+[submodule "SPECIALS/CUSTOM_GPSNTP"]
+	path = SPECIALS/CUSTOM_GPSNTP
+	url = https://github.com/petermilne/acq400_custom_GPSNTP.git
+[submodule "SPECIALS/CUSTOM_ACQ480FIR"]
+	path = SPECIALS/CUSTOM_ACQ480FIR
+	url = https://github.com/D-TACQ/CUSTOM_ACQ480FIR.git
