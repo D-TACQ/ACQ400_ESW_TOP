@@ -143,6 +143,12 @@ make
 cd ..
 ```
 
+## 8 opt packages
+
+```
+(cd SPECIALS; ./make.all.packages)
+```
+
 # Make a release
 
 Only "master_version_host" can increment the VERSION number, but other hosts can create release tarballs for local use, and to prove that the distributed source is good. To make a "non master version host" release tarball.
