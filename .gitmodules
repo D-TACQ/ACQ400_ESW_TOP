@@ -87,3 +87,6 @@
 [submodule "SPECIALS/CUSTOM_ACQ480FIR"]
 	path = SPECIALS/CUSTOM_ACQ480FIR
 	url = https://github.com/D-TACQ/CUSTOM_ACQ480FIR.git
+[submodule "SPECIALS/CUSTOM_WRPG"]
+	path = SPECIALS/CUSTOM_WRPG
+	url = https://github.com/D-TACQ/CUSTOM_WRPG.git
