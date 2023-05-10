@@ -85,9 +85,15 @@ acq400ioc links them
 
 end of.
 
+# MAKING A RELEASE
 Making a master_version_host
 git submodule set-url ACQ400RELEASE git@github.com:D-TACQ/ACQ400RELEASE.git
 cd ACQ400RELEASE/
 git checkout master
 git pull origin master
+
+BUILDING for master FAIL:
+- we're in a detached head, so we can't upload .version. So the version never increments.
+- research: how to avoid detached head.
+
 
