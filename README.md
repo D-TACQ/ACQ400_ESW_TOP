@@ -51,6 +51,7 @@ cp d-tacq.config .config
 ./make.zynq oldconfig
 ./make.zynq uImage modules dtbs
 cd ..
+./make-common-libs
 ```
 
 ## 2 Initrd and Rootfs: buildroot
@@ -73,6 +74,7 @@ cd acq400_buildroot
 make acq400_main_defconfig
 make
 cd ..
+
 ```
 
 fails at pyepics?. just make again ...

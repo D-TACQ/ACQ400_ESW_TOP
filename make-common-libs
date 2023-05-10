@@ -1,0 +1,9 @@
+#!/bin/bash
+# build common position includes and libs to suit custom packages
+
+mkdir -p include
+ln -s $PWD/acq400_buildroot/output/host/arm-buildroot-linux-gnueabihf/sysroot/usr/include/popt.h include
+
+
+mkdir -p lib/linux-arm
+ln -s $PWD/acq400_buildroot/output/target/usr/lib/libpopt.so* lib/linux-arm
