@@ -90,3 +90,6 @@
 [submodule "SPECIALS/CUSTOM_WRPG"]
 	path = SPECIALS/CUSTOM_WRPG
 	url = https://github.com/D-TACQ/CUSTOM_WRPG.git
+[submodule "SPECIALS/CUSTOM_MULTIEVENT"]
+	path = SPECIALS/CUSTOM_MULTIEVENT
+	url = https://github.com/D-TACQ/custom_multievent.git
