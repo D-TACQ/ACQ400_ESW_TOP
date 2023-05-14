@@ -93,3 +93,6 @@
 [submodule "SPECIALS/CUSTOM_MULTIEVENT"]
 	path = SPECIALS/CUSTOM_MULTIEVENT
 	url = https://github.com/D-TACQ/custom_multievent.git
+[submodule "ACQ1014"]
+	path = ACQ1014
+	url = https://github.com/D-TACQ/ACQ1014.git
