@@ -96,4 +96,9 @@ BUILDING for master FAIL:
 - we're in a detached head, so we can't upload .version. So the version never increments.
 - research: how to avoid detached head.
 
+20220516:
+OK, forget submodules:
+git clone git@github.com:D-TACQ/ACQ400RELEASE.git ACQ400RELEASE.M
+cd ACQ400RELEASE.M
+git clone git://eigg/BITSTREAMS/ACQ400/ ACQ400_FPGA
 
