@@ -102,3 +102,71 @@ git clone git@github.com:D-TACQ/ACQ400RELEASE.git ACQ400RELEASE.M
 cd ACQ400RELEASE.M
 git clone git://eigg/BITSTREAMS/ACQ400/ ACQ400_FPGA
 
+Updating the master master repo
+
+eg we made changes to ACQ400DRV, ACQ400COMMON, ACQ2x06:
+
+git submodule update --remote ACQ400DRV
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 5 (delta 3), reused 4 (delta 3), pack-reused 0
+Unpacking objects: 100% (5/5), 1.12 KiB | 16.00 KiB/s, done.
+
+
+[pgm@hoy5 ACQ400_ESW_TOP]$ git submodule update --remote ACQ400COMMON
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 4 (delta 3), reused 4 (delta 3), pack-reused 0
+Unpacking objects: 100% (4/4), 543 bytes | 15.00 KiB/s, done.
+
+[pgm@hoy5 ACQ400_ESW_TOP]$ git submodule update --remote ACQ2x06
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), 397 bytes | 4.00 KiB/s, done.
+From https://github.com/D-TACQ/ACQ2x06
+   1dc7d15..dcc1f3e  main       -> origin/main
+Submodule path 'ACQ2x06': checked out 'dcc1f3e66e15e5bd89f53f4bb9e02e49da94bd59'
+
+
+On the Master build host:
+git pull origin main
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 2 (delta 1), reused 2 (delta 1), pack-reused 0
+Unpacking objects: 100% (2/2), 641 bytes | 45.00 KiB/s, done.
+From https://github.com/D-TACQ/ACQ400_ESW_TOP
+ * branch            main       -> FETCH_HEAD
+   843808f..f15f339  main       -> origin/main
+Fetching submodule ACQ2x06
+From https://github.com/D-TACQ/ACQ2x06
+   1dc7d15..dcc1f3e  main       -> origin/main
+Fetching submodule ACQ400COMMON
+From https://github.com/D-TACQ/ACQ400COMMON
+   446e75a..187f658  master     -> origin/master
+Fetching submodule ACQ400DRV
+From https://github.com/D-TACQ/ACQ400DRV
+   b2a294a..594bfa2  main2      -> origin/main2
+Updating 843808f..f15f339
+Fast-forward
+ ACQ2x06      | 2 +-
+ ACQ400COMMON | 2 +-
+ ACQ400DRV    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+[pgm@staffa3 ACQ400_ESW_TOP]$ git submodule update
+Submodule path 'ACQ2x06': checked out 'dcc1f3e66e15e5bd89f53f4bb9e02e49da94bd59'
+Submodule path 'ACQ400COMMON': checked out '187f6581b1a64768c820516e3c509b155f1b5331'
+Submodule path 'ACQ400DRV': checked out '594bfa2a282536ea8f470fc7a75a4ecc803ec993'
+
+
+pushd ACQ2x06; ./make.package; popd
+cd ACQ400COMMON; ./make.package; popd
+cd ACQ400DRV; ./make.zynq package; popd
+
+cd ACQ400RELEASE.M; ./scripts/make.release
+
+
