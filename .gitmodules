@@ -96,3 +96,6 @@
 [submodule "ACQ1014"]
 	path = ACQ1014
 	url = https://github.com/D-TACQ/ACQ1014.git
+[submodule "SPECIALS/SWE_HAPI_package"]
+	path = SPECIALS/SWE_HAPI_package
+	url = https://github.com/D-TACQ/SWE_HAPI_package.git
