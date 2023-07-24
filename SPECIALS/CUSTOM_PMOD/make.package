@@ -6,7 +6,7 @@ PKG=custom_pmod
 PACKAGES=../../PACKAGES
 
 rm -Rf opkg/*
-mkdir -p opkg/usr/local/init
+mkdir -p opkg/usr/local/init release
 
 cp init/* opkg/usr/local/init
 
