@@ -1,0 +1,26 @@
+#!/bin/sh
+
+echo +++ custom_pmod.init 01
+if [ -e /mnt/local/custom_pmod.conf ]; then
+	source /mnt/local/custom_pmod.conf
+else
+	echo +++ custom_pmod.init /mnt/local/custom_pmod.conf NOT FOUND .. exit	
+	exit 0
+fi
+
+mkdir -p /dev/gpio
+for site in $CUSTOM_PMODS
+do
+	fru="/mnt/local/CUSTOM_PMOD_${site}_*.fru"
+	if [ -e $fru ]; then
+		echo +++ custom_pmod.init SITE:$site FRU $fru
+		echo 1 > /dev/gpio/pmod${site}_present
+		mkdir -p /dev/sites/$site
+		cp $fru /dev/sites/$site/eeprom
+	else
+		echo +++ custom_pmod.init SITE:$site ERROR NO FRU
+	fi
+done
+
+
+echo +++ custom_pmod.init 99

@@ -1,0 +1,17 @@
+#!/bin/bash
+# SOS : simple one shot
+DC=$(date +%y%m%d%H%M)
+SEQ=04
+PKG=custom_pmod
+PACKAGES=../../PACKAGES
+
+rm -Rf opkg/*
+mkdir -p opkg/usr/local/init
+
+cp init/* opkg/usr/local/init
+
+tar cvzf release/${SEQ}-${PKG}-${DC}.tgz -C opkg .
+ls -l release/${SEQ}-${PKG}-${DC}.tgz
+rm -f ${PACKAGES}/${SEQ}-${PKG}*
+cp release/${SEQ}-${PKG}-${DC}.tgz ${PACKAGES}
+
