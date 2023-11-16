@@ -102,3 +102,6 @@
 [submodule "KMCU"]
 	path = KMCU
 	url = https://github.com/D-TACQ/KMCU
+[submodule "SPECIALS/CUSTOM_LIA"]
+	path = SPECIALS/CUSTOM_LIA
+	url = https://github.com/D-TACQ/CUSTOM_LIA
