@@ -99,3 +99,6 @@
 [submodule "SPECIALS/SWE_HAPI_package"]
 	path = SPECIALS/SWE_HAPI_package
 	url = https://github.com/D-TACQ/SWE_HAPI_package.git
+[submodule "KMCU"]
+	path = KMCU
+	url = https://github.com/D-TACQ/KMCU
