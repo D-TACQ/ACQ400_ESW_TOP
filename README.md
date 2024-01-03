@@ -103,7 +103,7 @@ Please review EPICS7/base/README.ACQ400
 ### Build
 
 
-
+```
 (cd EPICS7; ./make.package)
 ```
 
