@@ -1,2 +1,6 @@
 export PATH=$PATH:/tools/Xilinx/SDK/2018.3/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin/
 
+[ ! -d PACKAGES ] && mkdir -p PACKAGES PACKAGES.OPT
+
+
+
