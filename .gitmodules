@@ -105,3 +105,6 @@
 [submodule "SPECIALS/CUSTOM_LIA"]
 	path = SPECIALS/CUSTOM_LIA
 	url = https://github.com/D-TACQ/CUSTOM_LIA
+[submodule "ACQ1102"]
+	path = ACQ1102
+	url = https://github.com/D-TACQ/ACQ1102.git
