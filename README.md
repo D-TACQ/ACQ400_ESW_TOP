@@ -115,7 +115,7 @@ Please review EPICS7/base/README.ACQ400
 
 ## 5 CARRIER Specific packages
 ```
-for P in ACQ400COMMON ACQ1001 ACQ1002 ACQ1014 ACQ2x06 Z7IO KMCU; do (cd $P; ./make.package); done
+for P in ACQ400COMMON ACQ1001 ACQ1002 ACQ1102 ACQ1014 ACQ2x06 Z7IO KMCU; do (cd $P; ./make.package); done
 ```
 
 ## 6 MISC PACKAGES
