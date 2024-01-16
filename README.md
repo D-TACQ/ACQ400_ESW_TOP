@@ -110,7 +110,7 @@ Please review EPICS7/base/README.ACQ400
 
 ## 4 ACQ400DRV
 ```
-(cd ACQ400DRV; ./make.package)
+(cd ACQ400DRV; ./make.zynq; ./make.package)
 ```
 
 ## 5 CARRIER Specific packages
