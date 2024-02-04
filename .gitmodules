@@ -105,3 +105,6 @@
 [submodule "ACQ1102"]
 	path = ACQ1102
 	url = https://github.com/D-TACQ/ACQ1102.git
+[submodule "DRIVERS-OOK"]
+	path = DRIVERS-OOK
+	url = https://github.com/D-TACQ/DRIVERS-OOK.git
