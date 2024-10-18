@@ -108,3 +108,6 @@
 [submodule "DRIVERS-OOK"]
 	path = DRIVERS-OOK
 	url = https://github.com/D-TACQ/DRIVERS-OOK.git
+[submodule "ACQ400_HTTPD_SEC"]
+	path = ACQ400_HTTPD_SEC
+	url = https://github.com/D-TACQ/ACQ400_HTTPD_SEC.git
