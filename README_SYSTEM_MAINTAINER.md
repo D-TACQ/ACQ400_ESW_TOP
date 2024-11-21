@@ -76,7 +76,8 @@ cd $HP/ACQ400_ESW_TOP
 git clone git://github/COMPANY/ACQ400RELEASE ACQ400RELEASE.M     # rename to distinguish from the public RO version
 (cd ACQ400RELEASE.M;./scripts/make.release)                      # is able to increment the global .version file
 ```
-### Note to self: after makeing the release, rememebr to push ACQ400RELEASE to that regular public builders get the uptodate version
+### Note to self:
+after making the release, remember to push ACQ400RELEASE so that regular public builders get the uptodate version
 ```
 (cd ACQ400RELEASE.M; git push origin master)
 
