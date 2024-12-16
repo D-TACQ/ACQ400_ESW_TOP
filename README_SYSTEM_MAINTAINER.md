@@ -51,6 +51,10 @@ The latter is controls the versions of all submodules; the former is the build a
 ```
 vi *.c; ./make.zynq; ./make.zynq package; update package, test.
 git push origin main
+
+# for buildroot and kernel be sure to tag and push
+git tag -a acq400_v2024.12 -m "make it clean"
+git push origin tag acq400_v2024.12
 ```
 
 2. Update submodule version in $HP/ACQ400/ACQ400_ESW_TOP:
