@@ -111,3 +111,6 @@
 [submodule "ACQ400_HTTPD_SEC"]
 	path = ACQ400_HTTPD_SEC
 	url = https://github.com/D-TACQ/ACQ400_HTTPD_SEC.git
+[submodule "SPECIALS/CUSTOM_SSHKEYS"]
+	path = SPECIALS/CUSTOM_SSHKEYS
+	url = https://github.com/D-TACQ/custom_sshkeys.git
