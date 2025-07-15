@@ -53,6 +53,8 @@ vi *.c; ./make.zynq; ./make.zynq package; update package, test.
 git push origin main
 
 # for buildroot and kernel be sure to tag and push
+make safedefconfig
+git commit -a -m "my changes"
 git tag -a acq400_v2024.12 -m "make it clean"
 git push origin tag acq400_v2024.12
 ```
