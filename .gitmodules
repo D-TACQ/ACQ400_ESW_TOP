@@ -114,3 +114,6 @@
 [submodule "SPECIALS/CUSTOM_SSHKEYS"]
 	path = SPECIALS/CUSTOM_SSHKEYS
 	url = https://github.com/D-TACQ/custom_sshkeys.git
+[submodule "SPECIALS/CUSTOM_MEAN"]
+	path = SPECIALS/CUSTOM_MEAN
+	url = https://github.com/D-TACQ/CUSTOM_MEAN.git
