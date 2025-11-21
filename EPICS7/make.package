@@ -27,7 +27,11 @@ cd base
 source ./setup.env
 ./setup_buildroot_links
 make
-(cd ../modules; for dir in *;do (cd $dir; make); done)
+(cd ../modules;
+(echo building asyn; cd asyn; make; cd -); \
+(echo building recsync; cd recsync/client; make; cd -); \
+(echo building seq; cd seq; make; cd -); \
+(echo building StreamDevice; cd StreamDevice; make; cd -))
 ./harvest
 )
 
