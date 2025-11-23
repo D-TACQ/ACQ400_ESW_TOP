@@ -117,3 +117,6 @@
 [submodule "SPECIALS/CUSTOM_MEAN"]
 	path = SPECIALS/CUSTOM_MEAN
 	url = https://github.com/D-TACQ/CUSTOM_MEAN.git
+[submodule "EPICS7/modules/recsync"]
+	path = EPICS7/modules/recsync
+	url = https://github.com/ChannelFinder/recsync
