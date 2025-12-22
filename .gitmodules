@@ -120,3 +120,9 @@
 [submodule "EPICS7/modules/recsync"]
 	path = EPICS7/modules/recsync
 	url = https://github.com/ChannelFinder/recsync
+[submodule "SPECIALS/CUSTOM_LIVETOP"]
+	path = SPECIALS/CUSTOM_LIVETOP
+	url = https://github.com/D-TACQ/CUSTOM_LIVETOP.git
+[submodule "SPECIALS/CUSTOM_DIO2STL"]
+	path = SPECIALS/CUSTOM_DIO2STL
+	url = https://github.com/D-TACQ/CUSTOM_DIO2STL.git
