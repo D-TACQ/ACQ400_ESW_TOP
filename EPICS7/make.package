@@ -52,19 +52,30 @@ echo EPICS_BASE $EPICS_BASE INSTALL_LOCATION $INSTALL_LOCATION
 	fi
 ) }
 
-cd base
+(cd base
 		source ./setup.env
 		./setup_buildroot_links
-cd -
+	(cd -
 
-[ "$BASE_TARGET" = "base" ] && report_build_report base
-(
-	cd ./modules;
-	for mod in $MOD_TARGETS; do
-		report_build_report $mod
-	done
+	[ "$BASE_TARGET" = "base" ] && report_build_report base
+	if [ "$MOD_TARGETS" != "none" ]; then
+		(
+		cd ./modules;
+		for mod in $MOD_TARGETS; do
+			report_build_report $mod
+		done
+		)
+	fi
+	)
+
+	if [ "$BUILD_TARGET" = "clean" ]; then
+		echo build clean complete;
+	        exit 1
+	fi
+
+	./harvest
+
 )
-echo ./harvest
 
 mkdir -p ${PACKAGES}
 
@@ -83,7 +94,12 @@ chmod a+rx opkg/epics/epics7.init
 
 IMG=${SEQ}-${PKG}-${DC}.ovl
 mksquashfs opkg/epics/* release/$IMG -no-xattrs
-ls -l release/$IMG
+SRC_BYTES=$(du -sb opkg | awk '{ print $1 }')
+SRC_HUMAN=$(du -sh opkg | awk '{ print $1 }')
+IMG_BYTES=$(ls -l release/$IMG | awk '{ print $5" "$9 }')
+IMG_HUMAN=$(ls -lh release/$IMG | awk '{ print $5 }' )
+echo "size bytes src:$SRC_BYTES ($SRC_HUMAN) image:release/$IMG $IMG_BYTES ($IMG_HUMAN)"
+#echo "size src:$(du -sh opkg) image:$(ls -lh release/$IMG)"
 rm -f ${PACKAGES}/${SEQ}-${PKG}*
 cp release/$IMG ${PACKAGES}
 
