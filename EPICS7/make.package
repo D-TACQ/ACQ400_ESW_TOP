@@ -5,12 +5,13 @@ SEQ=39
 PKG=epics7
 PACKAGES=../PACKAGES
 
+set -e
 
 if [ -e /usr/local/epics ]; then
 	if [ -L /usr/local/epics ]; then
-		ltgt="$(ls -l /usr/local/|grep epics | awk '{ print $11 }')"
+		ltgt="$(ls -l /usr/local/|grep epics\  | awk '{ print $11 }')"
 		ltgt=${ltgt%/}
-		#echo ltgt $ltgt
+		echo ltgt $ltgt
 		if [ "$ltgt" = "$PWD" ]; then
 			echo /usr/local/epics is correctly set
 		else
@@ -22,18 +23,48 @@ else
 	sudo ln -s $PWD /usr/local/epics
 fi
 
-(
+# build base by default . set BASE_TARGET=none to stub
+BASE_TARGET=${BASE_TARGET:-base}
+# list of modules to build. set MOD_TARGETS= to stub all
+MOD_TARGETS=${MOD_TARGETS:-asyn recsync/client seq StreamDevice}
+# could be "clean" for example.
+BUILD_TARGET=${BUILD_TARGET:-all}
+
+echo BASE_TARGET $BASE_TARGET
+echo MOD_TARGETS $MOD_TARGETS
+
+export BUILD_MODE=run   # asyn requirement from 2026-01-07
+
+# running '( cd thing; command )' subprocess gets new path context, main process keeps old context, second 'cd -' not required.
+report_build_report() { (
+	echo RBR building $1
+	cd $1
+echo EPICS_BASE $EPICS_BASE INSTALL_LOCATION $INSTALL_LOCATION
+	#make EPICS_BASE=$EPICS_BASE $BUILD_TARGET
+	make $BUILD_TARGET
+	RC=$?
+	if [ $RC -eq 0 ]; then
+		echo "RBR build $1 SUCCESS"
+	else
+		echo "RBR build $1 ERROR $RC"
+		exit $RC
+		echo AFTER exit
+	fi
+) }
+
 cd base
-source ./setup.env
-./setup_buildroot_links
-make
-(cd ../modules;
-(echo building asyn; cd asyn; make; cd -); \
-(echo building recsync; cd recsync/client; make; cd -); \
-(echo building seq; cd seq; make; cd -); \
-(echo building StreamDevice; cd StreamDevice; make; cd -))
-./harvest
+		source ./setup.env
+		./setup_buildroot_links
+cd -
+
+[ "$BASE_TARGET" = "base" ] && report_build_report base
+(
+	cd ./modules;
+	for mod in $MOD_TARGETS; do
+		report_build_report $mod
+	done
 )
+echo ./harvest
 
 mkdir -p ${PACKAGES}
 
