@@ -103,6 +103,23 @@ Please review EPICS7/base/README.ACQ400
 ### Build
 
 
+@@todo epics modules may need this change 
+```
+base) pgm@hoy6:~/PROJECTS/ACQ400_ESW_TOP/EPICS7/modules/recsync$ git diff
+diff --git a/client/configure/RELEASE b/client/configure/RELEASE
+index c1d193f..a507b78 100644
+--- a/client/configure/RELEASE
++++ b/client/configure/RELEASE
+@@ -23,6 +23,7 @@
+ 
+ # EPICS_BASE usually appears last so other apps can override stuff:
+ #EPICS_BASE=/path/to/epics-base
++EPICS_BASE=/usr/local/epics/base
+ 
+ # Set RULES here if you want to take build rules from somewhere
+ # other than EPICS_BASE:
+```
+
 ```
 (cd EPICS7; ./make.package)
 ```
