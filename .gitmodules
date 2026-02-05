@@ -126,3 +126,6 @@
 [submodule "SPECIALS/CUSTOM_DIO2STL"]
 	path = SPECIALS/CUSTOM_DIO2STL
 	url = https://github.com/D-TACQ/CUSTOM_DIO2STL.git
+[submodule "EPICS7/modules/p4p"]
+	path = EPICS7/modules/p4p
+	url = https://github.com/epics-base/p4p
