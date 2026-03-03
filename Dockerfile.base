@@ -46,7 +46,8 @@ RUN /bin/bash -c "source ./setenv; cd acq400_kernel && cp d-tacq.config .config 
 COPY acq400_buildroot /workspace/acq400_buildroot
 RUN if [ -f "acq400_buildroot/package/linuxptp/0010-missing-enum-value.patch" ]; then \
         mv acq400_buildroot/package/linuxptp/0010-missing-enum-value.patch acq400_buildroot/package/linuxptp/0010-missing-enum-value.patch.disabled; \
-    fi                                                                                                                                                  RUN --mount=type=cache,target=/workspace/acq400_buildroot/dl \
+    fi
+RUN --mount=type=cache,target=/workspace/acq400_buildroot/dl \
     # --mount=type=cache,target=/workspace/acq400_buildroot/output \
     /bin/bash -xc "source ./setenv; export FORCE_UNSAFE_CONFIGURE=1 && cd acq400_buildroot && make acq400_main_defconfig && (make || make)"
 
