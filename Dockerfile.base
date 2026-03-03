@@ -1,0 +1,57 @@
+# syntax=docker/dockerfile:1.6
+FROM ubuntu:18.04 AS base
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 1. Install host prerequisites (including fakeroot and software-properties-common)
+RUN apt-get update && apt-get install -y \
+    wget tar git make gcc g++ bc python u-boot-tools \
+    libextutils-makemaker-cpanfile-perl libncurses5-dev \
+    libfftw3-dev libpcre++-dev cpio unzip rsync \
+    libevent-dev libtirpc-dev re2c squashfs-tools fakeroot \
+    software-properties-common && \
+    add-apt-repository ppa:git-core/ppa -y && \
+    apt-get update && apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+# 2. Install modern CMake (3.22.1)
+RUN wget -qO- "https://cmake.org/files/v3.22/cmake-3.22.1-linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local
+
+# 3. Download and install Xilinx 2018.3 Toolchain
+RUN wget -q https://github.com/D-TACQ/ACQ400_ESW_TOP/releases/download/0.0.1/xilinx-2018.3.tgz -O /tmp/xilinx-2018.3.tgz && \
+    tar xvzf /tmp/xilinx-2018.3.tgz -C / && \
+    rm /tmp/xilinx-2018.3.tgz
+
+# 4. System symlinks and fake sudo
+RUN ln -s /bin/bash /usr/bin/bash && \
+    mkdir -p /PROJECTS && chmod 777 /PROJECTS && ln -s /workspace /PROJECTS/ACQ400_ESW_TOP && \
+    mkdir -p /root/PROJECTS && ln -s /workspace /root/PROJECTS/ACQ400_ESW_TOP && \
+    mkdir -p /usr/local/epics && chmod 777 /usr/local/epics && \
+    ln -s /workspace/EPICS7/acq400_epics_base /usr/local/epics/base && \
+    ln -s /workspace/EPICS7/modules /usr/local/epics/modules && \
+    echo '#!/bin/bash' > /usr/bin/sudo && echo 'exec "$@"' >> /usr/bin/sudo && chmod +x /usr/bin/sudo
+
+WORKDIR /workspace
+
+# 5. Global Environment Configuration
+COPY setenv /workspace/
+ENV KBUILD_BUILD_USER="acq400_builder"
+ENV KBUILD_BUILD_HOST="docker"
+
+# 6. Build Kernel                                                                                                                                       COPY acq400_kernel /workspace/acq400_kernel
+RUN /bin/bash -c "source ./setenv && cd acq400_kernel && cp d-tacq.config .config && ./make.zynq oldconfig && ./make.zynq uImage modules dtbs"
+
+# 7. Build Initrd and Rootfs (with BuildKit Cache Mounts)
+COPY acq400_buildroot /workspace/acq400_buildroot
+RUN if [ -f "acq400_buildroot/package/linuxptp/0010-missing-enum-value.patch" ]; then \
+        mv acq400_buildroot/package/linuxptp/0010-missing-enum-value.patch acq400_buildroot/package/linuxptp/0010-missing-enum-value.patch.disabled; \
+    fi                                                                                                                                                  RUN --mount=type=cache,target=/workspace/acq400_buildroot/dl \
+    # --mount=type=cache,target=/workspace/acq400_buildroot/output \
+    /bin/bash -xc "source ./setenv; export FORCE_UNSAFE_CONFIGURE=1 && cd acq400_buildroot && make acq400_main_defconfig && (make || make)"
+
+# 8. Build EPICS
+COPY EPICS7 /workspace/EPICS7
+RUN sed -i 's|#EPICS_BASE=/path/to/epics-base|EPICS_BASE=/usr/local/epics/base|' EPICS7/modules/recsync/client/configure/RELEASE && \
+    find EPICS7 -name "make.package" -o -name "setup.env" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g' {} + && \
+    find EPICS7 -name "make.package" -exec sed -i 's/read thing//g' {} + && \
+    /bin/bash -c "source ./setenv; cd EPICS7 && ./make.package"

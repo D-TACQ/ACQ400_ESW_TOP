@@ -1,0 +1,84 @@
+# syntax=docker/dockerfile:1.6
+FROM acq400-base:latest AS product
+WORKDIR /workspace
+
+# 1. Neutralize global scripts (for the overlay packages)
+COPY make-common-libs /workspace/
+# Note: we run sed fixes on the fly in the layers below to avoid breaking cache.
+
+# 2. Build Drivers and Common Libs
+COPY DRIVERS-OOK /workspace/DRIVERS-OOK
+COPY ACQ400DRV /workspace/ACQ400DRV
+COPY ACQ400COMMON /workspace/ACQ400COMMON
+RUN find ACQ400DRV -name "make.package" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g; s/read thing//g' {} + && \
+    find ACQ400DRV -name "Makefile" -exec sed -i 's/git tag/echo Skipping git tag/g' {} + && \
+    /bin/bash -c "source ./setenv; ./make-common-libs && cd ACQ400DRV && ./make.zynq && export MAKEFLAGS= && ./make.package"
+RUN find ACQ400COMMON -name "make.package" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g; s/read thing//g' {} + && \
+    /bin/bash -c "source ./setenv; cd ACQ400COMMON && export MAKEFLAGS= && ./make.package"
+
+# 3. Build Carrier Packages
+COPY ACQ1001 /workspace/ACQ1001
+COPY ACQ1002 /workspace/ACQ1002
+COPY ACQ1102 /workspace/ACQ1102
+COPY ACQ1014 /workspace/ACQ1014
+COPY ACQ2x06 /workspace/ACQ2x06
+COPY Z7IO /workspace/Z7IO
+COPY KMCU /workspace/KMCU
+RUN find ACQ1* ACQ2* Z7IO KMCU -name "make.package" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g; s/read thing//g' {} + && \
+    /bin/bash -c "source ./setenv; for P in ACQ1001 ACQ1002 ACQ1102 ACQ1014 ACQ2x06 Z7IO KMCU; do (cd \$P && ./make.package); done"
+
+# 4. Build Misc Packages
+COPY HTTPD /workspace/HTTPD
+COPY ACQ400_TRANSIENT /workspace/ACQ400_TRANSIENT
+COPY ACQ400_AI_MONITOR /workspace/ACQ400_AI_MONITOR
+RUN find HTTPD ACQ400* -name "make.package" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g; s/read thing//g' {} + && \
+    /bin/bash -c "source ./setenv; for P in HTTPD ACQ400_TRANSIENT ACQ400_AI_MONITOR; do (cd \$P && ./make.package); done"
+
+# 5. Build IOC
+COPY acq400ioc /workspace/acq400ioc
+RUN find acq400ioc -name "make.package" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g; s/read thing//g; s/git branch --show-current/git rev-parse --abbrev-ref  HEAD/g' {} + && \
+    find acq400ioc -name "Makefile" -exec sed -i 's/git tag/echo Skipping git tag/g' {} + && \
+    /bin/bash -c "source ./setenv; \
+    set -e; \
+    cd acq400ioc; \
+    mkdir -p lib/linux-arm lib/linux-x86_64 include; \
+    echo '--> Injecting headers and libs directly from ACQ400DRV...'; \
+    find ../ACQ400DRV -name '*.h' -exec cp -a {} include/ \;; \
+    find ../ACQ400DRV/lib/linux-arm -name 'libacq.so*' -exec cp -a {} lib/linux-arm/ \;; \
+    find ../ACQ400DRV/lib/linux-x86_64 -name 'libacq.so*' -exec cp -a {} lib/linux-x86_64/ \;; \
+    set +e; \
+    source /usr/local/epics/base/setup.env 2>/dev/null; \
+    source ../EPICS7/base/setup.env 2>/dev/null; \
+    set -e; \
+    echo '--> Compiling IOC...'; \
+    make; \
+    ./make.package; \
+    mkdir -p ../PACKAGES; \
+    find . -name '*.tgz' -exec cp -v {} ../PACKAGES/ \;"
+
+# 6. Build Special Packages
+COPY SPECIALS /workspace/SPECIALS
+RUN find SPECIALS -name "make.package" -exec sed -i 's|$HOME/PROJECTS/ACQ400_ESW_TOP|/workspace|g; s/read thing//g' {} + && \
+    /bin/bash -c "source ./setenv; cd SPECIALS && for p in CUSTOM* BOLODSP RADCELF; do if [ -d \"\$p\" ]; then (cd \"\$p\" && fakeroot ./make.package); fi; done"
+
+# 7. Package the Final Release Image
+COPY ACQ400RELEASE /workspace/ACQ400RELEASE
+RUN cd ACQ400RELEASE && \
+    sed -i 's/ACQ400_ESW_TOP/workspace/g' scripts/make.release && \
+    sed -i 's/\[ "$(whoami)" = "root" \]/false/g' scripts/make.release && \
+    sed -i 's/vi RELEASENOTES/echo "Automated Docker Build" > RELEASENOTES/g' scripts/make.release && \
+    sed -i 's/read yn/yn=y/g' scripts/make.release && \
+    sed -i 's/git /echo Skipping git /g' scripts/make.release && \
+    echo 1 > .version && \
+    mkdir -p OPT/ko && touch OPT/ko/fpga-001-dummy.img && \
+    /bin/bash -c "source ../setenv; ./scripts/make.release"
+
+# 8. Gather artifacts and export to host
+RUN mkdir -p /export/raw_ingredients /export/final_release && \
+    cp /workspace/acq400_kernel/uImage /export/raw_ingredients/ 2>/dev/null || true && \
+    cp /workspace/acq400_kernel/arch/arm/boot/dts/*.dtb /export/raw_ingredients/ 2>/dev/null || true && \
+    cp -r /workspace/acq400_buildroot/output/images/* /export/raw_ingredients/ 2>/dev/null || true && \
+    cp -r /workspace/PACKAGES /export/raw_ingredients/ 2>/dev/null || true && \
+    cp -r /workspace/ACQ400RELEASE/REL/* /export/final_release/ 2>/dev/null || true
+FROM scratch AS artifacts
+COPY --from=product /export /
