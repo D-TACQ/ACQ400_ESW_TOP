@@ -1,0 +1,42 @@
+name: ACQ400 Firmware Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-firmware:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code and all submodules
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    # Set up Docker Buildx (Required for advanced Dockerfile 1.6 features)
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    # Build the Base Image
+    # The --load flag ensures the finished image is kept in the local 
+    # Docker daemon so the next step can find 'acq400-base:latest'
+    - name: Build Base Image
+      run: |
+        docker buildx build -f Dockerfile.base -t acq400-base:latest --load .
+
+    # Build Product Image & Export Artifacts directly to the runner's disk
+    - name: Build Product and Export Release
+      run: |
+        docker buildx build -f Dockerfile.product --target artifacts --output type=local,dest=./READY_TO_DEPLOY .
+
+    # Upload the final release so you can download it from the GitHub website
+    - name: Upload Release Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: acq400-release-package
+        path: ./READY_TO_DEPLOY/
+        retention-days: 7
