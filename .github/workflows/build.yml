@@ -26,12 +26,19 @@ jobs:
     # Docker daemon so the next step can find 'acq400-base:latest'
     - name: Build Base Image
       run: |
-        docker buildx build -f Dockerfile.base -t acq400-base:latest --load .
+        docker buildx build -f Dockerfile.base -t acq400-base:latest \
+        --cache-to=type=gha,mode=max,scope=base \
+        --cache-from=type=gha,scope=base \
+        --load .
 
     # Build Product Image & Export Artifacts directly to the runner's disk
     - name: Build Product and Export Release
       run: |
-        docker buildx build -f Dockerfile.product --target artifacts --output type=local,dest=./READY_TO_DEPLOY .
+        docker buildx build -f Dockerfile.product --target artifacts \
+        --build-context acq400-base:latest=docker-image://acq400-base:latest \
+        --cache-to=type=gha,mode=max,scope=product \
+        --cache-from=type=gha,scope=product \
+        --output type=local,dest=./READY_TO_DEPLOY .
 
     # Upload the final release so you can download it from the GitHub website
     - name: Upload Release Artifacts
