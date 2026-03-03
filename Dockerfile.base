@@ -39,7 +39,7 @@ ENV KBUILD_BUILD_USER="acq400_builder"
 ENV KBUILD_BUILD_HOST="docker"
 
 # 6. Build Kernel                                                                                                                                       COPY acq400_kernel /workspace/acq400_kernel
-RUN /bin/bash -c "source ./setenv && cd acq400_kernel && cp d-tacq.config .config && ./make.zynq oldconfig && ./make.zynq uImage modules dtbs"
+RUN /bin/bash -c "source ./setenv; cd acq400_kernel && cp d-tacq.config .config && ./make.zynq oldconfig && ./make.zynq uImage modules dtbs"
 
 # 7. Build Initrd and Rootfs (with BuildKit Cache Mounts)
 COPY acq400_buildroot /workspace/acq400_buildroot
