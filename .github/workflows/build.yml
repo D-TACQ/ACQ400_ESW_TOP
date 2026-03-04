@@ -17,25 +17,29 @@ jobs:
       with:
         submodules: recursive
 
+    # Spin up a temporary local Docker registry on port 5000
+    - name: Start Local Docker Registry
+      run: docker run -d -p 5000:5000 --name registry registry:2
+
     # Set up Docker Buildx (Required for advanced Dockerfile 1.6 features)
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
+      with:
+        driver-opts: network=host
 
     # Build the Base Image
-    # The --load flag ensures the finished image is kept in the local 
-    # Docker daemon so the next step can find 'acq400-base:latest'
-    - name: Build Base Image
+    - name: Build Base Docker Image
       run: |
         docker buildx build -f Dockerfile.base -t acq400-base:latest \
         --cache-to=type=gha,mode=max,scope=base \
         --cache-from=type=gha,scope=base \
-        --load .
+        --push .
 
     # Build Product Image & Export Artifacts directly to the runner's disk
-    - name: Build Product and Export Release
+    - name: Build Product Docker Image and Export Release
       run: |
         docker buildx build -f Dockerfile.product --target artifacts \
-        --build-context acq400-base:latest=docker-image://acq400-base:latest \
+        --build-context acq400-base:latest=docker-image://localhost:5000/acq400-base:latest \
         --cache-to=type=gha,mode=max,scope=product \
         --cache-from=type=gha,scope=product \
         --output type=local,dest=./READY_TO_DEPLOY .
