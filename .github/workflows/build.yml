@@ -30,7 +30,7 @@ jobs:
     # Build the Base Image
     - name: Build Base Docker Image
       run: |
-        docker buildx build -f Dockerfile.base -t acq400-base:latest \
+        docker buildx build -f Dockerfile.base -t localhost:5000/acq400-base:latest \
         --cache-to=type=gha,mode=max,scope=base \
         --cache-from=type=gha,scope=base \
         --push .
